@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ValidatorTest {
 
     @Test
-    void testStringSchema() {
+    public void testStringSchema() {
         var validator = new Validator();
         var schema = validator.string();
 
@@ -30,5 +30,31 @@ class ValidatorTest {
         var schema1 = validator.string();
         assertTrue(schema1.minLength(10).minLength(4).isValid("Hexlet"));
     }
+
+    @Test
+    public void testNumberSchema() {
+        var validator = new Validator();
+        var schema = validator.number();
+
+        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.positive().isValid(null));
+
+        schema.required();
+        assertFalse(schema.isValid(null));
+        assertTrue(schema.isValid(10));
+        assertFalse(schema.isValid(-10));
+        assertFalse(schema.isValid(0));
+
+        schema.range(5, 10);
+        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(10));
+        assertFalse(schema.isValid(4));
+        assertFalse(schema.isValid(11));
+
+        var schema1 = validator.number();
+        assertTrue(schema1.range(4, 9).range(2, 4).isValid(3));
+    }
+
 }
 

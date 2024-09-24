@@ -2,32 +2,20 @@ package hexlet.code.schemas;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.function.Predicate;
-
-public class StringSchema {
-    private Predicate<String> requiredPredicate = str -> true;
-    private Predicate<String> minLengthPredicate = str -> true;
-    private Predicate<String> containsPredicate = str -> true;
+public class StringSchema extends BaseSchema<String> {
 
     public StringSchema required() {
-        requiredPredicate = StringUtils::isNotEmpty;
+        addCondition("required", StringUtils::isNotEmpty);
         return this;
     }
 
     public StringSchema minLength(int minLength) {
-        minLengthPredicate = str -> str.length() >= minLength;
+        addCondition("minLength", str -> str != null && str.length() >= minLength);
         return this;
     }
 
     public StringSchema contains(String subString) {
-        containsPredicate = str -> str.contains(subString);
+        addCondition("contains", str -> str != null && str.contains(subString));
         return this;
-    }
-
-    public boolean isValid(String str) {
-        return requiredPredicate
-                .and(minLengthPredicate)
-                .and(containsPredicate)
-                .test(str);
     }
 }
