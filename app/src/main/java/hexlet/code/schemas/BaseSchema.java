@@ -11,7 +11,7 @@ public abstract class BaseSchema<T> {
         conditions.put(key, predicate);
     }
 
-    public boolean isValid(T value) {
-        return conditions.values().stream().allMatch(condition -> condition.test(value));
+    public boolean isValid(Object value) {
+        return conditions.values().stream().allMatch(condition -> condition.test((T) value));
     }
 }

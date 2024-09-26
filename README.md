@@ -12,3 +12,9 @@ A library to check the validity of data.
 * Make
 * JDK 21
 * Gradle 8.10
+
+### Setup:
+```sh
+$ git clone https://github.com/Parfenix/java-project-78.git && cd java-project-78
+$ make install
+```
