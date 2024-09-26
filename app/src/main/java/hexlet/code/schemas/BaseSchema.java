@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 public abstract class BaseSchema<T> {
     protected Map<String, Predicate<T>> conditions = new HashMap<>();
 
-    protected void addCondition(String key, Predicate<T> predicate) {
+    protected final void addCondition(String key, Predicate<T> predicate) {
         conditions.put(key, predicate);
     }
 
