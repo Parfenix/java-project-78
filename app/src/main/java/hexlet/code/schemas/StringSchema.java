@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
 
     public StringSchema required() {
         addCondition("required", StringUtils::isNotEmpty);
